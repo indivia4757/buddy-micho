@@ -13,29 +13,28 @@
 - **Achievements** — 11 unlockable achievements from "First Steps" to "Shiny Legendary"
 - **Multi-language** — English, 한국어, 中文, 日本語
 - **Auto-backup** — Binary backup created before every patch
+- **Cross-platform** — Works on macOS, Linux, and Windows
 
 ## Install
-
-### As Claude Code Skill (recommended)
-
-```bash
-git clone https://github.com/YOUR_USERNAME/buddy-micho.git ~/.claude/skills/buddy-micho
-```
-
-Then use `/buddy-micho` in Claude Code.
-
-### As CLI tool
-
-```bash
-npx buddy-micho
-```
-
-Or install globally:
 
 ```bash
 npm install -g buddy-micho
 buddy-micho
 ```
+
+Or run without installing:
+
+```bash
+npx buddy-micho
+```
+
+### As Claude Code Skill
+
+```bash
+git clone https://github.com/indivia4757/buddy-micho.git ~/.claude/skills/buddy-micho
+```
+
+Then use `/buddy-micho` in Claude Code.
 
 ## Usage
 
@@ -67,7 +66,20 @@ Claude Code generates your buddy deterministically from `hash(userId + salt)`. T
 2. **Patches** the Claude Code binary (replacing the default salt)
 3. **Tracks** every roll in your local collection (`~/.buddy-micho/collection.json`)
 
-The original binary is backed up automatically and can be restored with `buddy-micho restore`.
+The salt is auto-detected from the binary, so it works across different Claude Code versions and installation methods (npm, Homebrew, Volta, standalone, etc.). The original binary is backed up automatically and can be restored with `buddy-micho restore`.
+
+## Compatibility
+
+| Environment | Supported |
+|-------------|-----------|
+| macOS (Intel / Apple Silicon) | Yes |
+| Linux | Yes |
+| Windows / WSL | Yes |
+| npm global install | Yes |
+| Homebrew | Yes |
+| Volta / pnpm / yarn global | Yes |
+| Standalone binary | Yes |
+| Bun-compiled binary | Yes |
 
 ## Named Presets (22+)
 
