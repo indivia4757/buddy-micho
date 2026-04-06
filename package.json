@@ -1,0 +1,34 @@
+{
+  "name": "buddy-micho",
+  "version": "1.0.0",
+  "description": "Claude Code buddy manager with collection, presets, and multi-language support",
+  "type": "module",
+  "bin": {
+    "buddy-micho": "./bin/buddy-micho.js"
+  },
+  "main": "./src/index.js",
+  "scripts": {
+    "start": "node bin/buddy-micho.js",
+    "test": "node --test src/__tests__/"
+  },
+  "keywords": [
+    "claude-code",
+    "buddy",
+    "companion",
+    "reroll",
+    "collection",
+    "gacha"
+  ],
+  "author": "",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "files": [
+    "bin/",
+    "src/",
+    "skill.md",
+    "README.md",
+    "LICENSE"
+  ]
+}
