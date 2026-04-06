@@ -5,13 +5,14 @@
 import * as readline from 'node:readline';
 import {
   generateBuddy, findSalt, estimateDifficulty,
-  findClaudeBinary, patchBinary, restoreBinary,
+  findClaudeBinary, patchBinary, restoreBinary, readCurrentSalt, detectBinaryType,
   loadCollection, addToCollection, toggleFavorite, setNickname, setCustomPersonality, getCollectionStats,
   listThemes, listNamedPresets, getPresetsByTheme, getPresetById,
   detectUserId, getCompanionInfo,
   setLanguage, getLanguage, t, getSupportedLanguages,
   formatBuddyCard, formatCollection, formatDifficulty,
   getDefaultPersonality, generateName,
+  setBinaryType,
   SPECIES, RARITIES, EYES, HATS,
 } from '../src/index.js';
 
@@ -101,6 +102,15 @@ async function main() {
     setLanguage(langFromFlag);
   }
 
+  // Detect Claude binary type for correct hash algorithm
+  try {
+    const binaryPath = await findClaudeBinary();
+    if (binaryPath) {
+      const binType = await detectBinaryType(binaryPath);
+      setBinaryType(binType);
+    }
+  } catch {}
+
   // Quick commands (after flag removal, args[0] is the actual command)
   const cmd = args[0];
   if (cmd === 'current') return await showCurrent();
@@ -165,7 +175,15 @@ async function interactiveMenu() {
 async function showCurrent() {
   const { id, source } = await detectUserId();
   const companion = await getCompanionInfo();
-  const buddy = generateBuddy(id);
+
+  // Read the actual salt from the Claude binary for accurate display
+  let actualSalt = null;
+  try {
+    const binaryPath = await findClaudeBinary();
+    if (binaryPath) actualSalt = await readCurrentSalt(binaryPath);
+  } catch {}
+
+  const buddy = actualSalt ? generateBuddy(id, actualSalt) : generateBuddy(id);
   const lang = getLanguage();
 
   // Look up nickname and custom personality from collection

@@ -39,16 +39,21 @@ export function mulberry32(seed) {
   };
 }
 
+// Cache the detected binary type to avoid re-reading the binary
+let _cachedBinaryType = null;
+
 /**
- * Detect if running under Bun
+ * Set the binary type for hash selection.
+ * Call this once after detecting the Claude binary type.
  */
-export function isBun() {
-  return typeof globalThis.Bun !== 'undefined';
+export function setBinaryType(type) {
+  _cachedBinaryType = type;
 }
 
 /**
- * Hash a string using the appropriate algorithm
+ * Hash a string using the appropriate algorithm based on the Claude binary type.
+ * Defaults to fnv1a (Node) if binary type hasn't been detected.
  */
 export function hashString(str) {
-  return isBun() ? wyhash(str) : fnv1a(str);
+  return _cachedBinaryType === 'bun' ? wyhash(str) : fnv1a(str);
 }

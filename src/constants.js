@@ -1,6 +1,6 @@
 // Buddy system constants (matching Claude Code's built-in buddy system)
 
-export const SALT = 'AFAZhuGAGXHehcb';
+export const SALT = 'wtdl7Juzl4RBmno';
 export const SALT_LENGTH = 15;
 
 export const SPECIES = [
