@@ -6,6 +6,7 @@ import * as readline from 'node:readline';
 import {
   generateBuddy, findSalt, estimateDifficulty,
   findClaudeBinary, patchBinary, restoreBinary, readCurrentSalt, detectBinaryType,
+  clearCompanionCache,
   loadCollection, addToCollection, toggleFavorite, setNickname, setCustomPersonality, getCollectionStats,
   listThemes, listNamedPresets, getPresetsByTheme, getPresetById,
   detectUserId, getCompanionInfo,
@@ -336,7 +337,7 @@ async function selectFromMatches(rl, matches, attempts, elapsed) {
   // Apply?
   const doApply = await askYesNo(rl, `\n  ${t('menu_apply')}? (y/n) > `);
   if (doApply) {
-    await applyBuddy(selected.salt);
+    await applyBuddy(selected.salt, rl);
   }
 }
 
@@ -479,7 +480,7 @@ async function showCollectionView() {
   console.log(`\n  ${t('total')}: ${stats.total} | ${t('favorites')}: ${stats.favorites} | ${t('completion')}: ${stats.completion}%`);
 }
 
-async function applyBuddy(salt) {
+async function applyBuddy(salt, rl) {
   console.log(`\n${t('patching')}`);
   const binaryPath = await findClaudeBinary();
   if (!binaryPath) {
@@ -498,6 +499,15 @@ async function applyBuddy(salt) {
     collection.stats.totalApplied++;
     const { saveCollection } = await import('../src/collection.js');
     await saveCollection(collection);
+
+    // Ask to clear companion cache so the new buddy takes effect on restart
+    if (rl) {
+      const doClear = await askYesNo(rl, `\n  ${t('clear_cache_prompt')} (y/n) > `);
+      if (doClear) {
+        const cleared = await clearCompanionCache();
+        console.log(`  ${cleared ? t('cache_cleared') : t('cache_not_found')}`);
+      }
+    }
   } catch (err) {
     console.log(`  Error: ${err.message}`);
   }

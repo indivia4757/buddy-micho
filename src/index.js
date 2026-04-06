@@ -8,7 +8,7 @@ export { THEMES, NAMED_PRESETS, listThemes, listNamedPresets, getPresetsByTheme,
 export { getDefaultPersonality, getAllPersonalities } from './personality.js';
 export { generateName } from './namegen.js';
 export { renderSprite, SPRITES } from './sprites.js';
-export { detectUserId, getCompanionInfo } from './identity.js';
+export { detectUserId, getCompanionInfo, clearCompanionCache } from './identity.js';
 export { setLanguage, getLanguage, t, getSupportedLanguages } from './i18n.js';
 export { formatBuddyCard, formatCollection, formatAchievements, formatDifficulty } from './display.js';
 export { SPECIES, RARITIES, EYES, HATS, STAT_NAMES, STAT_FLOORS } from './constants.js';

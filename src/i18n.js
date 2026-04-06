@@ -68,6 +68,9 @@ const STRINGS = {
     backup_at: 'Backup saved at: {path}',
     restore_success: 'Restored original binary from backup.',
     binary_not_found: 'Could not find Claude Code binary.',
+    clear_cache_prompt: 'Clear companion cache so the new buddy appears on restart?',
+    cache_cleared: 'Companion cache cleared. New buddy will appear on next session.',
+    cache_not_found: 'No companion cache found (already clean).',
 
     // Presets
     presets_title: 'Buddy Presets',
@@ -153,6 +156,9 @@ const STRINGS = {
     backup_at: '백업 저장: {path}',
     restore_success: '백업에서 원본 바이너리를 복원했습니다.',
     binary_not_found: 'Claude Code 바이너리를 찾을 수 없습니다.',
+    clear_cache_prompt: '컴패니언 캐시를 삭제하여 재시작 시 새 버디가 나타나게 할까요?',
+    cache_cleared: '컴패니언 캐시가 삭제되었습니다. 다음 세션에서 새 버디가 나타납니다.',
+    cache_not_found: '컴패니언 캐시가 없습니다 (이미 깨끗합니다).',
 
     presets_title: '버디 프리셋',
     select_preset: '테마를 선택하세요:',
@@ -235,6 +241,9 @@ const STRINGS = {
     backup_at: '备份保存在：{path}',
     restore_success: '已从备份恢复原始二进制文件。',
     binary_not_found: '找不到 Claude Code 二进制文件。',
+    clear_cache_prompt: '清除伙伴缓存，使新伙伴在重启后出现？',
+    cache_cleared: '伙伴缓存已清除。新伙伴将在下次会话中出现。',
+    cache_not_found: '未找到伙伴缓存（已经是干净的）。',
 
     presets_title: '伙伴预设',
     select_preset: '选择主题：',
@@ -317,6 +326,9 @@ const STRINGS = {
     backup_at: 'バックアップ保存先：{path}',
     restore_success: 'バックアップから元のバイナリを復元しました。',
     binary_not_found: 'Claude Codeバイナリが見つかりません。',
+    clear_cache_prompt: 'コンパニオンキャッシュをクリアして、再起動時に新しいバディを表示しますか？',
+    cache_cleared: 'コンパニオンキャッシュをクリアしました。次のセッションで新しいバディが表示されます。',
+    cache_not_found: 'コンパニオンキャッシュが見つかりません（すでにクリーンです）。',
 
     presets_title: 'バディプリセット',
     select_preset: 'テーマを選択：',

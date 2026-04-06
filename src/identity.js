@@ -50,3 +50,24 @@ export async function getCompanionInfo() {
   const config = await readClaudeConfig();
   return config?.companion || null;
 }
+
+/**
+ * Clear the cached companion data from Claude config.
+ * This forces Claude Code to regenerate the buddy from the (patched) salt on next startup.
+ * Returns true if cleared, false if no config or no companion field found.
+ */
+export async function clearCompanionCache() {
+  for (const path of CONFIG_CANDIDATES) {
+    try {
+      const data = await readFile(path, 'utf-8');
+      const config = JSON.parse(data);
+      if (config.companion) {
+        delete config.companion;
+        const { writeFile: wf } = await import('node:fs/promises');
+        await wf(path, JSON.stringify(config, null, 2) + '\n');
+        return true;
+      }
+    } catch {}
+  }
+  return false;
+}
